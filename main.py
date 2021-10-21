@@ -1,23 +1,22 @@
 
-weight = [0.1, 0.2, 0.0]
+weights = [0.3, 0.2, 0.9]
 
-def w_sum(a, b):
-    assert(len(a) == len(b))
-    output = 0
+def ele_mul(number, vector):
 
-    for i in range(len(a)):
-        output += (a[i] * b[i])
+    output = [0, 0, 0]
+    assert(len(output) == len(vector))
+
+    for i in range(len(vector)):
+        output[i] = number * vector[i]
     return output
 
 def neural_network(input, weights):
-    preq = w_sum(input, weights)
+    preq = ele_mul(input, weights)
     return preq
 
 
-toes = [8.5, 9.5, 9.9, 9.0]#текущее среднее значение игр сыгранное игроками
-wlrec = [0.65, 0.8, 0.8, 0.9]#средняя побед
-nfans = [1.2, 1.3, 0.5, 1.0]#число болельщиков(в миллионах)
+wlrec = [0.65, 0.8, 0.8, 0.9]
 
-input = [toes[0], wlrec[0], nfans[0]]
-preq = neural_network(input, weight)
-print('Вероятность победы: ', round(preq, 2)*100, '%', sep='')
+input = wlrec[0]
+preq = neural_network(input, weights)
+print(preq)
