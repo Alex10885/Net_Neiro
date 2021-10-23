@@ -1,17 +1,33 @@
 import numpy as np
 
-weights = np.array([0.1, 0.2, 0])
+# игр % побед # болельщиков
+ih_wgt = np.array(
+    [[0.1, 0.2, -0.1],  # hid[0]
+     [-0.1, 0.1, 0.9],  # hid[1]
+     [0.1, 0.4, 0.1]]  # hid[2]
+)
+
+# hid[0] hid[1] hid[2]
+hp_wgt = np.array(
+    [[0.3, 1.1, -0.3],  # травмы
+     [0.1, 0.2, 0.0],  # победа
+     [0.0, 1.3, 0.1]]  # печаль
+
+)
+
+weights = [ih_wgt, hp_wgt]
 
 
 def neural_network(input, weights):
-    preq = input.dot(weights)
-    return preq
+    hid = input.dot(weights[0])
+    pred = hid.dot(weights[1])
+    return pred
 
 
-toes = np.array([8.5, 9.5, 9.9, 9.0])
-wlrec = np.array([0.65, 0.8, 0.8, 0.9])
-nfans = np.array([1.2, 1.3, 0.5, 1.0])
+toes = [8.5, 9.5, 9.9, 9.0]
+wlrec = [0.65, 0.8, 0.8, 0.9]
+nfans = [1.2, 1.3, 0.5, 1.0]
 
 input = np.array([toes[0], wlrec[0], nfans[0]])
-preq = neural_network(input, weights)
-print('Вероятность победы: ', round(preq, 2) * 100, '%', sep='')
+pred = neural_network(input, weights)
+print(pred)
